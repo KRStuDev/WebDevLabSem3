@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subscribe to Heatwave Advisories</title>
+</head>
+<body>
+
+    <header>
+        <h1>Heatwave Advisory Subscription</h1>
+    </header>
+
+    <main>
+        <form action="#" method="post">
+            <p>
+                <label for="fullname">Full Name:</label><br>
+                <input type="text" id="fullname" name="fullname" placeholder="John Doe" required>
+            </p>
+
+            <p>
+                <label for="email">Email Address:</label><br>
+                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+            </p>
+
+            <p>
+                <label for="mobile">Mobile Number:</label><br>
+                <input type="tel" id="mobile" name="mobile" placeholder="9876543210" required>
+            </p>
+            <p>
+                <label for="region">Select Region:</label><br>
+                <select id="region" name="region" required>
+                    <option value="">-- Choose Your Region --</option>
+                    <option value="north">North Zone</option>
+                    <option value="central">Central Zone</option>
+                    <option value="south">South Zone</option>
+                    <option value="east">East Zone</option>
+                    <option value="west">West Zone</option>
+                </select>
+            </p>
+            <p>
+                <label>Preferred Alert Language:</label><br>
+                <input type="radio" id="lang-en" name="language" value="english" checked>
+                <label for="lang-en">English</label><br>
+                
+                <input type="radio" id="lang-hi" name="language" value="hindi">
+                <label for="lang-hi">Hindi</label><br>
+                
+                <input type="radio" id="lang-mr" name="language" value="marathi">
+                <label for="lang-mr">Marathi</label>
+            </p>
+            <p>
+                <label>Alert Types to Receive:</label><br>
+                <input type="checkbox" id="alert-sms" name="alert_type" value="sms">
+                <label for="alert-sms">SMS Alerts</label><br>
+
+                <input type="checkbox" id="alert-email" name="alert_type" value="email" checked>
+                <label for="alert-email">Email Bulletins</label><br>
+
+                <input type="checkbox" id="alert-whatsapp" name="alert_type" value="whatsapp">
+                <label for="alert-whatsapp">WhatsApp Emergency Warnings</label>
+            </p>
+            <p>
+                <button type="submit">Subscribe Now</button>
+                <button type="reset">Reset Form</button>
+            </p>
+
+        </form>
+    </main>
+
+    <footer>
+        <p><a href="index.html">Back to Home</a></p>
+    </footer>
+
+</body>
+</html>
