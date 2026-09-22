@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heatwave Monitoring Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 500px; margin: 20px auto; padding: 15px; }
+        h2 { color: #b71c1c; text-align: center; }
+        fieldset { margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        legend { font-weight: bold; color: #b71c1c; }
+        .field { margin-bottom: 12px; }
+        label { display: block; font-weight: bold; margin-bottom: 4px; }
+        input, select { width: 100%; padding: 8px; box-sizing: border-box; }
+        .error { color: red; font-size: 0.85em; display: none; margin-top: 2px; }
+        .success { color: green; background: #e8f8e8; padding: 10px; border: 1px solid green; display: none; margin-bottom: 15px; text-align: center; }
+        button { background: #b71c1c; color: white; padding: 10px 15px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>Heatwave Monitoring Form</h2>
+    
+    <div id="successMsg" class="success">Form submitted successfully!</div>
+
+    <form id="weatherForm">
+        <fieldset>
+            <legend>Observer Details</legend>
+            <div class="field">
+                <label for="name">Observer Name:</label>
+                <input type="text" id="name">
+                <span class="error" id="nameErr">Enter letters only (at least 3 characters).</span>
+            </div>
+            <div class="field">
+                <label for="email">Email:</label>
+                <input type="email" id="email">
+                <span class="error" id="emailErr">Enter a valid email address.</span>
+            </div>
+            <div class="field">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile">
+                <span class="error" id="mobileErr">Enter a valid 10-digit mobile number.</span>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Weather Observations</legend>
+            <div class="field">
+                <label for="station">AWS Station ID:</label>
+                <input type="text" id="station" placeholder="e.g. AWS001">
+                <span class="error" id="stationErr">Format must be 'AWS' followed by 3 numbers (e.g., AWS001).</span>
+            </div>
+            <div class="field">
+                <label for="date">Observation Date:</label>
+                <input type="date" id="date">
+                <span class="error" id="dateErr">Date cannot be blank.</span>
+            </div>
+            <div class="field">
+                <label for="temp">Max Temperature (°C):</label>
+                <input type="number" id="temp" step="0.1">
+                <span class="error" id="tempErr">Enter a numeric temperature value.</span>
+            </div>
+            <div class="field">
+                <label for="humidity">Humidity (%):</label>
+                <input type="number" id="humidity">
+                <span class="error" id="humErr">Enter a value between 0 and 100.</span>
+            </div>
+            <div class="field">
+                <label for="alert">Alert Level:</label>
+                <select id="alert">
+                    <option value="">-- Select Level --</option>
+                    <option value="Yellow">Yellow (Watch)</option>
+                    <option value="Orange">Orange (Alert)</option>
+                    <option value="Red">Red (Warning)</option>
+                </select>
+                <span class="error" id="alertErr">Please select an alert level.</span>
+            </div>
+        </fieldset>
+
+        <button type="submit">Submit Form</button>
+    </form>
+
+    <script>
+        document.getElementById('weatherForm').addEventListener('submit', function(e) {
+            // Task 5: Stop default submit
+            e.preventDefault();
+
+            // Clear errors
+            document.querySelectorAll('.error').forEach(el => el.style.display = 'none');
+            document.getElementById('successMsg').style.display = 'none';
+
+            let isValid = true;
+
+            const name = document.getElementById('name').value.trim();
+            if (!/^[A-Za-z\s]{3,}$/.test(name)) {
+                document.getElementById('nameErr').style.display = 'block';
+                isValid = false;
+            }
+
+            const station = document.getElementById('station').value.trim();
+            if (!/^AWS\d{3}$/.test(station)) {
+                document.getElementById('stationErr').style.display = 'block';
+                isValid = false;
+            }
+
+            const email = document.getElementById('email').value.trim();
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById('emailErr').style.display = 'block';
+                isValid = false;
+            }
+
+            const mobile = document.getElementById('mobile').value.trim();
+            if (!/^[6-9]\d{9}$/.test(mobile)) {
+                document.getElementById('mobileErr').style.display = 'block';
+                isValid = false;
+            }
+
+            if (!document.getElementById('date').value) {
+                document.getElementById('dateErr').style.display = 'block';
+                isValid = false;
+            }
+
+            const temp = document.getElementById('temp').value;
+            if (temp === '' || isNaN(temp)) {
+                document.getElementById('tempErr').style.display = 'block';
+                isValid = false;
+            }
+
+            const hum = document.getElementById('humidity').value;
+            if (hum === '' || hum < 0 || hum > 100) {
+                document.getElementById('humErr').style.display = 'block';
+                isValid = false;
+            }
+
+            if (!document.getElementById('alert').value) {
+                document.getElementById('alertErr').style.display = 'block';
+                isValid = false;
+            }
+
+            if (isValid) {
+                document.getElementById('successMsg').style.display = 'block';
+                this.reset();
+            }
+        });
+    </script>
+</body>
+</html>
